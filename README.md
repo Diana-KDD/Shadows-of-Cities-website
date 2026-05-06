@@ -10,7 +10,7 @@
   - Удаление записей
 
 ## Технологии
-- ASP.NET Core (Razor Pages)
+- ASP.NET Core (MVC)
 - Entity Framework Core
 - SQLite
 - HTML, CSS, JavaScript
@@ -28,10 +28,11 @@
 Авторизация не требуется.
 
 ## Структура проекта
-- `/Pages` — страницы Razor Pages
+- `/Controllers` — контроллеры
 - `/Models` — модели данных
 - `/Data` — контекст базы данных
 - `/wwwroot` — статические файлы (CSS, JS)
+- `/Views` — HTML-шаблоны
 
 ## Автор
 Диана, учебный проект, 07.2026
