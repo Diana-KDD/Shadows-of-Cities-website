@@ -12,7 +12,7 @@
 ## Технологии
 - ASP.NET Core (MVC)
 - Entity Framework Core
-- SQLite
+- SQL Server
 - HTML, CSS, JavaScript
 
 ## Как запустить
@@ -30,6 +30,7 @@
 ## Структура проекта
 - `/Controllers` — контроллеры
 - `/Models` — модели данных
+- `/Configurations` — конфигурация моделей данных
 - `/Data` — контекст базы данных
 - `/wwwroot` — статические файлы (CSS, JS)
 - `/Views` — HTML-шаблоны
