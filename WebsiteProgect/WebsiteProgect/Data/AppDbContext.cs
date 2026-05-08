@@ -14,7 +14,7 @@ namespace WebsiteProgect.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Data Source=HOME-PC\\MSSQLSERVER01;Initial Catalog=WebSiteShadowsOfCities;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=HOME-PC\\MSSQLSERVER01;Initial Catalog=WebSiteShadowsOfCities_v2;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

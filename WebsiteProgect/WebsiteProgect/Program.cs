@@ -3,8 +3,7 @@ using WebsiteProgect.Data;
 
 using (AppDbContext context = new())
 {
-    await context.Database.EnsureDeletedAsync();
-    await context.Database.EnsureCreatedAsync();
+    await context.Database.MigrateAsync();
 }
 
 var builder = WebApplication.CreateBuilder(args);
