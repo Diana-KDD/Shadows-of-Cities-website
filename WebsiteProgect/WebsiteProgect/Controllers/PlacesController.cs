@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 using WebsiteProgect.Data;
 using WebsiteProgect.Models;
 
 namespace WebsiteProgect.Controllers
 {
-    public class PlaceController: Controller
+    public class PlacesController: Controller
     {
         private readonly AppDbContext _context;
-        private readonly ILogger<PlaceController> _logger;
+        private readonly ILogger<PlacesController> _logger;
 
-        public PlaceController(AppDbContext context, ILogger<PlaceController> logger)
+        public PlacesController(AppDbContext context, ILogger<PlacesController> logger)
         {
             _context = context;
             _logger = logger;
@@ -90,5 +91,26 @@ namespace WebsiteProgect.Controllers
 
             return View(places);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var place = await _context.Places
+                .Where(p => p.Id == id)
+                .Include(p => p.Images)
+                .Include(p => p.City)
+                    .ThenInclude(c => c.Country)
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync();
+
+            if (place == null)
+            {
+                return NotFound();
+            }
+
+            _logger.LogInformation($"Details: {id}");
+            return View(place);
+        }
+
+
     }
 }

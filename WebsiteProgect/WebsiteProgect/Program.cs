@@ -29,7 +29,7 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Place}/{action=Index}"
+    pattern: "{controller=Places}/{action=Index}/{id?}"
 );
 
 app.Run();
