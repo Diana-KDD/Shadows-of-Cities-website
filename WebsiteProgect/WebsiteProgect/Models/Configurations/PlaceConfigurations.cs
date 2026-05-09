@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace WebsiteProgect.Models.Configurations
 {
-    public class PlacesConfigurations : IEntityTypeConfiguration<Places>
+    public class PlaceConfigurations : IEntityTypeConfiguration<Place>
     {
-        public void Configure(EntityTypeBuilder<Places> builder)
+        public void Configure(EntityTypeBuilder<Place> builder)
         {
             builder.HasKey(p => p.Id);
 

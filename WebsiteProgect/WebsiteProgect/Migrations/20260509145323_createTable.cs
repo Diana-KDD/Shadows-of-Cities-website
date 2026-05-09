@@ -5,7 +5,7 @@
 namespace WebsiteProgect.Migrations
 {
     /// <inheritdoc />
-    public partial class createTables : Migration
+    public partial class createTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,7 +29,7 @@ namespace WebsiteProgect.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,15 +95,15 @@ namespace WebsiteProgect.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ImageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PlacesId = table.Column<int>(type: "int", nullable: false),
+                    PlaceId = table.Column<int>(type: "int", nullable: false),
                     IsPrimary = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Images_Places_PlacesId",
-                        column: x => x.PlacesId,
+                        name: "FK_Images_Places_PlaceId",
+                        column: x => x.PlaceId,
                         principalTable: "Places",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -127,15 +127,21 @@ namespace WebsiteProgect.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Countries_Name",
+                table: "Countries",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_ImageName",
                 table: "Images",
                 column: "ImageName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_PlacesId",
+                name: "IX_Images_PlaceId",
                 table: "Images",
-                column: "PlacesId");
+                column: "PlaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Places_CategoryId",

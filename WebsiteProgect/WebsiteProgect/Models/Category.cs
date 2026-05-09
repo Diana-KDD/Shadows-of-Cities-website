@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public ICollection<Places> Places { get; set; } = new List<Places>();
+        public ICollection<Place> Places { get; set; } = new List<Place>();
     }
 }

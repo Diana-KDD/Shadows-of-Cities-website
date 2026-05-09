@@ -11,8 +11,8 @@ using WebsiteProgect.Data;
 namespace WebsiteProgect.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260508104843_createTables")]
-    partial class createTables
+    [Migration("20260509145323_createTable")]
+    partial class createTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,9 +81,13 @@ namespace WebsiteProgect.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Countries");
                 });
@@ -110,7 +114,7 @@ namespace WebsiteProgect.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int>("PlacesId")
+                    b.Property<int>("PlaceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -118,12 +122,12 @@ namespace WebsiteProgect.Migrations
                     b.HasIndex("ImageName")
                         .IsUnique();
 
-                    b.HasIndex("PlacesId");
+                    b.HasIndex("PlaceId");
 
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("WebsiteProgect.Models.Places", b =>
+            modelBuilder.Entity("WebsiteProgect.Models.Place", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,16 +185,16 @@ namespace WebsiteProgect.Migrations
 
             modelBuilder.Entity("WebsiteProgect.Models.Image", b =>
                 {
-                    b.HasOne("WebsiteProgect.Models.Places", "Place")
+                    b.HasOne("WebsiteProgect.Models.Place", "Place")
                         .WithMany("Images")
-                        .HasForeignKey("PlacesId")
+                        .HasForeignKey("PlaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Place");
                 });
 
-            modelBuilder.Entity("WebsiteProgect.Models.Places", b =>
+            modelBuilder.Entity("WebsiteProgect.Models.Place", b =>
                 {
                     b.HasOne("WebsiteProgect.Models.Category", "Category")
                         .WithMany("Places")
@@ -222,7 +226,7 @@ namespace WebsiteProgect.Migrations
                     b.Navigation("Cities");
                 });
 
-            modelBuilder.Entity("WebsiteProgect.Models.Places", b =>
+            modelBuilder.Entity("WebsiteProgect.Models.Place", b =>
                 {
                     b.Navigation("Images");
                 });

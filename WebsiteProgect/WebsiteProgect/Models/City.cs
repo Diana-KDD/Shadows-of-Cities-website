@@ -10,6 +10,6 @@ namespace WebsiteProgect.Models
 
         [NotMapped]
         public Country Country { get; set; } = new Country();
-        public ICollection<Places> Places { get; set; } = new List<Places>();
+        public ICollection<Place> Places { get; set; } = new List<Place>();
     }
 }

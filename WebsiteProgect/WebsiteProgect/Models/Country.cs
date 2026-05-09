@@ -1,4 +1,6 @@
-﻿namespace WebsiteProgect.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace WebsiteProgect.Models
 {
     public class Country
     {

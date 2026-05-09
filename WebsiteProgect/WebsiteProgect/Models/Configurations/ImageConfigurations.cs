@@ -17,7 +17,7 @@ namespace WebsiteProgect.Models.Configurations
 
             builder.HasOne(i => i.Place)
                    .WithMany(i => i.Images)
-                   .HasForeignKey(i => i.PlacesId)
+                   .HasForeignKey(i => i.PlaceId)
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(i => i.IsPrimary).HasDefaultValue(0);

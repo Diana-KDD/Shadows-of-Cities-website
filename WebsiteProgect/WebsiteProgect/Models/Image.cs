@@ -7,10 +7,10 @@ namespace WebsiteProgect.Models
         public int Id { get; set; }
         public string ImageName { get; set; } = null!;
         public string ImagePath { get; set; } = null!;
-        public int PlacesId { get; set; }
+        public int PlaceId { get; set; }
         public int IsPrimary {  get; set; }
 
         [NotMapped]
-        public Places Place { get; set; } = new Places();
+        public Place Place { get; set; } = new Place();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WebsiteProgect.Models
 {
-    public class Places
+    public class Place
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
