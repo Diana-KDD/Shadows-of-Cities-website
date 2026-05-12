@@ -26,5 +26,44 @@ namespace WebsiteProgect.Controllers
 
             return View(places);
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var place = await _context.Places
+                .Include(p=>p.City)
+                    .ThenInclude(c=>c.Country)
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p=>p.Id == id);
+            
+            if(place == null)
+                return NotFound();
+
+            return View(place);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var place = await _context.Places
+                .Include(p=>p.Images)
+                .FirstOrDefaultAsync(p=>p.Id==id);
+
+            if(place == null)
+                return NotFound();
+
+            foreach(var image in place.Images)
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", image.ImagePath.TrimStart('/'));
+                if(System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+            _context.Places.Remove(place);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"Удалена карточка с местом: {place.Name}");
+            return RedirectToAction("Index");
+        }
     }
 }

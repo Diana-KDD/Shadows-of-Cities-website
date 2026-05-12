@@ -27,10 +27,10 @@ else
                 }
                 <h2>@place.Name</h2>
                 <p>@place.City?.Country?.Name, @place.City?.Name</p>
-                <a href="/Admin/ChangePlace">Изменить</a>
-                <a href="/Admin/DeletePlace">Удалить</a>
+                <a href="/Admin/Change">Изменить</a>
+                <a href="/Admin/Delete/@place.Id">Удалить</a>
             </div>
         }
     </div>
-    <a href="/Admin/AddPlace">Добавить место</a>
+    <a href="/Admin/Add">Добавить место</a>
 }

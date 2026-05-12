@@ -1,0 +1,20 @@
+﻿@* Views/Admin/Delete.cshtml *@
+@model WebsiteProgect.Models.Place
+@{
+    ViewData["Title"] = "Удаление места";
+}
+
+<h2>Вы уверены, что хотите удалить это место?</h2>
+
+<div class="confirm-box">
+    <p><strong>Название:</strong> @Model.Name</p>
+    <p>@Model.City?.Country?.Name, @Model.City?.Name</p>
+    <p><strong>Категория:</strong> @Model.Category?.Name</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <!-- Скрытое поле для передачи id -->
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit">Удалить</button>
+    <a href="/Admin">Отмена</a>
+</form>
