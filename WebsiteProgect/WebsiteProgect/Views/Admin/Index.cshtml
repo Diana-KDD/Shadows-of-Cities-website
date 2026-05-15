@@ -1,36 +1,49 @@
 ﻿@* Views/Admin/Index.cshtml *@
 @model List<WebsiteProgect.Models.Place>
-@{
-    ViewData["Title"] = "Выбор действий для админа";
-}
+@{}
 
-<a href="/Places/Index">Вернуться в каталог</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админка</title>
+    <link rel="stylesheet" href="/css/styleAdmin.css" />
+</head>
+<body>
+    <a href="/Places/Index">Вернуться в каталог</a>
+    <h2>Редактор места</h2>
 
-@if (Model.Count == 0)
-{
-    <a href="/Admin/AddPlace">Добавить первое место</a>
-}
-else
-{
-    <div class="catalog">
-        @foreach (var place in Model)
-        {
-            <div class="card">
-                @if (place.Images != null && place.Images.Any())
-                {
-                    <img src="@place.Images.FirstOrDefault(i => i.IsPrimary == 1)?.ImagePath"
-                         alt="@place.Name" />
-                }
-                else
-                {
-                    <div class="no-photo">Нет фото</div>
-                }
-                <h2>@place.Name</h2>
-                <p>@place.City?.Country?.Name, @place.City?.Name</p>
-                <a href="/Admin/Change">Изменить</a>
-                <a href="/Admin/Delete/@place.Id">Удалить</a>
-            </div>
-        }
-    </div>
-    <a href="/Admin/Add">Добавить место</a>
-}
+    <button id="categoryChange">Редактировать категории</button>
+    <div class="modalCategory"><div class="box"></div></div>
+
+    @if (Model.Count == 0)
+    {
+        <a href="/Admin/Create">Добавить первое место</a>
+    }
+    else
+    {
+        <div class="catalog">
+            @foreach (var place in Model)
+            {
+                <div class="card">
+                    @if (place.Images != null && place.Images.Any())
+                    {
+                        <img src="@place.Images.FirstOrDefault(i => i.IsPrimary == 1)?.ImagePath"
+                             alt="@place.Name" />
+                    }
+                    else
+                    {
+                        <div class="no-photo">Нет фото</div>
+                    }
+                    <h2>@place.Name</h2>
+                    <p>@place.City?.Country?.Name, @place.City?.Name</p>
+                    <a href="/Admin/Change">Изменить</a>
+                    <a href="/Admin/Delete/@place.Id">Удалить</a>
+                </div>
+            }
+        </div>
+        <a href="/Admin/Create">Добавить место</a>
+    }
+    <script src="/js/adminIndex.js"></script>
+</body>
+</html>
+
