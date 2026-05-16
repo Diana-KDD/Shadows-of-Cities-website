@@ -12,8 +12,13 @@
     <a href="/Places/Index">Вернуться в каталог</a>
     <h2>Редактор места</h2>
 
-    <button id="categoryChange">Редактировать категории</button>
-    <div class="modalCategory"><div class="box"></div></div>
+    <div class="btnsEdit">
+        <button class="categoryChange">Редактировать категории</button>
+        <button class="countryChange">Редактировать страны</button>
+        <button class="cityChange">Редактировать города</button>
+    </div>
+
+    <div class="modalUpdate"><div class="box"></div></div>
 
     @if (Model.Count == 0)
     {
@@ -43,7 +48,8 @@
         </div>
         <a href="/Admin/Create">Добавить место</a>
     }
-    <script src="/js/adminIndex.js"></script>
+    <script src="/js/dataConfig.js"></script>
+    <script src="/js/adminIndexCountry.js"></script>
 </body>
 </html>
 

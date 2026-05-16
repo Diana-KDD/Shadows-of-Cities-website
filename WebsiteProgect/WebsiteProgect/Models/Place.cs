@@ -11,13 +11,10 @@ namespace WebsiteProgect.Models
         public string Description {  get; set; } = null!;
         public string? History {  get; set; }
         public string? YearClosure { get; set; }
-        public string CreatedAt { get; set; } = null!;
+        public DateTime? CreatedAt { get; set; }
 
-        [NotMapped]
-        public Category? Category { get; set; } = new Category();
-        [NotMapped]
-        public City? City { get; set; } = new City();
-
+        public Category? Category { get; set; }
+        public City? City { get; set; }
         public ICollection<Image> Images { get; set; } = new List<Image>();
 
     }

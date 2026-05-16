@@ -10,7 +10,6 @@ namespace WebsiteProgect.Models
         public int PlaceId { get; set; }
         public int IsPrimary {  get; set; }
 
-        [NotMapped]
-        public Place Place { get; set; } = new Place();
+        public Place? Place { get; set; }
     }
 }

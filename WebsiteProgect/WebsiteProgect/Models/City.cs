@@ -8,8 +8,7 @@ namespace WebsiteProgect.Models
         public string Name { get; set; } = null!;
         public int CountryId { get; set; }
 
-        [NotMapped]
-        public Country Country { get; set; } = new Country();
+        public Country? Country { get; set; }
         public ICollection<Place> Places { get; set; } = new List<Place>();
     }
 }
