@@ -1,0 +1,37 @@
+﻿@* Views/Places/Details.cshtml *@
+@model WebsiteProgect.Models.Place
+@{
+    ViewData["Title"] = "Детальная информация места";
+}
+
+<h1>@Model.Name</h1>
+<p>@Model.Category?.Name</p>
+
+@if (@Model.Images != null && @Model.Images.Any())
+{
+    <img src="@Model.Images.FirstOrDefault(i => i.IsPrimary == 1)?.ImagePath"
+         alt="@Model.Name" />
+}
+else
+{
+    <div class="no-photo">Нет фото</div>
+}
+
+@if(@Model.Images.Count > 1)
+{
+    @foreach (var image in @Model.Images)
+    {
+        @if(image.IsPrimary != 1)
+        {
+            <img src="@image.ImagePath"
+                 alt="@Model.Name + @image.Id" />
+        }
+    }
+}
+
+<p>@Model.Description</p>
+<p>@Model.History</p>
+<p>Год закрытия: @Model.YearClosure</p>
+<p>@Model.City?.Country?.Name, @Model.City?.Name</p>
+<p>@Model.CreatedAt</p>
+<a href="/Places/Index">Назад</a>

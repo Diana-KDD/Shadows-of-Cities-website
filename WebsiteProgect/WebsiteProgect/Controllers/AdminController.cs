@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebsiteProgect.Data;
 using WebsiteProgect.DTO;
@@ -347,6 +347,5 @@ namespace WebsiteProgect.Controllers
             _logger.LogInformation($"Изменена карточка с местом: {place.Name}");
             return RedirectToAction("Index");
         }
-
     }
 }
