@@ -1,0 +1,565 @@
+﻿/* === БАЗОВЫЕ СТИЛИ === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: default;
+    user-select: none;
+}
+
+body {
+    padding: 30px 80px;
+    background-color: #181818;
+}
+
+/* === ТИПОГРАФИКА === */
+.website-title {
+    font-size: 80px;
+    color: #d0d0d0;
+}
+
+.website-name {
+    font-size: 25px;
+    color: #d0d0d0;
+}
+
+/* === РАЗДЕЛИТЕЛЬ === */
+hr {
+    margin: 20px 0;
+    border: 7px solid #333333;
+}
+
+/* === КНОПКИ (БАЗОВЫЕ) === */
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 10px 0;
+    background: #8b9d83;
+    color: rgb(36, 55, 26);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    border-radius: 5px;
+}
+
+    button:hover {
+        background: rgb(157, 181, 144);
+        color: rgb(230, 252, 207);
+        border: 1px solid rgb(230, 252, 207);
+    }
+
+/* Группы кнопок */
+.btnsEdit,
+.btnsAction {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.btnsEdit {
+    justify-content: center;
+}
+
+    .btnsEdit button,
+    .btnsAction button {
+        flex-grow: 1;
+    }
+
+.placeAdd {
+    width: 100%;
+}
+
+/* Специальные кнопки */
+.btnClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    margin: 0;
+}
+
+    .btnClose:hover {
+        color: rgb(120, 142, 105);
+        background-color: transparent;
+        border: 1px solid transparent;
+    }
+
+.btnSave {
+    color: rgb(90, 173, 40);
+}
+
+    .btnSave:hover {
+        color: rgb(160, 255, 76);
+        border-color: rgb(160, 255, 76);
+    }
+
+.btnDelete {
+    color: rgb(137, 15, 15);
+    border-color: #333333;
+}
+
+    .btnDelete:hover {
+        color: #a04040;
+        border-color: #8b3a3a;
+        background-color: #2a2020;
+    }
+
+.btnsAction button:last-child {
+    border-color: transparent;
+}
+
+/* === ТАБЛИЦА === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    color: #b0b0b0;
+}
+
+thead th {
+    background-color: #2a2a2a;
+    color: rgb(160, 187, 151);
+    padding: 12px 16px;
+    text-align: center;
+    border-bottom: 2px solid #333333;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+tbody td {
+    padding: 10px 16px;
+    border: 1px solid #333333;
+    text-align: center;
+    font-size: 16px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #252525;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #1e1e1e;
+}
+
+tbody tr:hover {
+    background-color: #2a2a2a;
+    transition: background-color 0.2s;
+}
+
+td img {
+    max-width: 300px;
+    max-height: 150px;
+}
+
+/* === МОДАЛЬНЫЕ ОКНА === */
+.modalUpdate,
+.modalWindow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    max-height: 80vh;
+    max-width: 80vh;
+    overflow-y: auto;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.content::-webkit-scrollbar {
+    width: 20px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+    border: 3px solid #f1f1f1;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.box {
+    position: relative;
+    background-color: rgb(198, 203, 193);
+    padding: 50px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.box h2 {
+    font-size: 35px;
+    color: rgb(91, 90, 83);
+    text-align: center;
+}
+
+.box h3 {
+    font-size: 22px;
+    color: rgb(91, 90, 83);
+    text-align: center;
+    font-style: italic;
+}
+
+.box label {
+    color: rgb(91, 90, 83);
+    padding-right: 5px;
+    font-size: 20px;
+}
+
+.box input,
+.box select {
+    background-color: rgb(235, 232, 221);
+    color: rgb(91, 90, 83);
+    border-color: rgb(207, 206, 201);
+    padding: 5px;
+    font-size: 20px;
+}
+
+.box p {
+    color: rgb(91, 90, 83);
+}
+
+.box form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btnModal {
+    font-size: 16px;
+    background-color: rgb(222, 225, 208);
+    color: rgb(91, 90, 83);
+    border-radius: 10px;
+}
+
+.btnModal:hover {
+    background-color: rgb(177, 176, 166);
+    color: rgb(231, 232, 218);
+    border-color: rgb(231, 232, 218);
+}
+
+.cardModalWindow {
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: rgb(191, 191, 182);
+    border: 4px double rgb(231, 232, 218);
+}
+
+.listParent {
+    position: relative;
+    padding: 40px 0;
+}
+
+.nameParent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgb(86, 82, 70);
+    font-weight: 200;
+    padding: 5px;
+    border: 1px solid;
+}
+
+/* === АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ (до 767px) === */
+@media (max-width: 767px) {
+    body {
+        padding: 10px 15px;
+    }
+
+    .website-title {
+        font-size: 28px;
+    }
+
+    .website-name {
+        font-size: 10px;
+    }
+
+    hr {
+        margin: 10px 0;
+        border-width: 3px;
+    }
+
+    button {
+        padding: 5px 10px;
+        font-size: 10px;
+        margin: 5px 0;
+    }
+
+    .btnsEdit,
+    .btnsAction {
+        gap: 5px;
+    }
+
+    thead th {
+        padding: 4px 6px;
+        font-size: 9px;
+        letter-spacing: 0.5px;
+        border-bottom-width: 1px;
+    }
+
+    tbody td {
+        padding: 4px 6px;
+        font-size: 9px;
+        border-width: 0.5px;
+    }
+
+    td img {
+        max-width: 100px;
+        max-height: 60px;
+    }
+
+    /* Модальные окна на мобильных */
+    .box {
+        padding: 30px 20px;
+        gap: 5px;
+    }
+
+    .box h2 {
+        font-size: 24px;
+    }
+
+    .box h3 {
+        font-size: 16px;
+    }
+
+    .box label {
+        font-size: 16px;
+    }
+
+    .box input,
+    .box select {
+        font-size: 16px;
+        padding: 3px;
+    }
+
+    .content {
+        max-width: 95vw;
+        max-height: 90vh;
+        border-radius: 15px;
+    }
+
+    .cardModalWindow {
+        padding: 8px 15px;
+        gap: 10px;
+    }
+
+    .listParent {
+        padding: 30px 0;
+    }
+
+    .nameParent {
+        font-size: 14px;
+        padding: 3px;
+    }
+
+    .btnModal {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ (768px - 1023px) === */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        padding: 20px 50px;
+    }
+
+    .website-title {
+        font-size: 50px;
+    }
+
+    .website-name {
+        font-size: 15px;
+    }
+
+    hr {
+        margin: 15px 0;
+        border-width: 5px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    thead th {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    tbody td {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    td img {
+        max-width: 200px;
+        max-height: 100px;
+    }
+
+    .box {
+        padding: 40px 40px;
+    }
+
+        .box h2 {
+            font-size: 30px;
+        }
+
+        .box h3 {
+            font-size: 20px;
+        }
+
+        .box label {
+            font-size: 18px;
+        }
+
+        .box input,
+        .box select {
+            font-size: 18px;
+        }
+
+    .content {
+        max-width: 85vw;
+        max-height: 85vh;
+    }
+
+    .btnModal {
+        font-size: 15px;
+        padding: 8px 18px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ БОЛЬШИХ ЭКРАНОВ (от 1440px) === */
+@media (min-width: 1440px) {
+    body {
+        padding: 40px 120px;
+    }
+
+    .website-title {
+        font-size: 100px;
+    }
+
+    .website-name {
+        font-size: 30px;
+    }
+
+    table {
+        font-size: 18px;
+    }
+
+    thead th {
+        padding: 16px 20px;
+        font-size: 16px;
+    }
+
+    tbody td {
+        padding: 14px 20px;
+        font-size: 18px;
+    }
+
+    td img {
+        max-width: 400px;
+        max-height: 200px;
+    }
+
+    .box {
+        padding: 60px 80px;
+    }
+
+    .content {
+        max-width: 70vw;
+        max-height: 75vh;
+    }
+
+    .cardModalWindow {
+        padding: 15px 30px;
+        gap: 30px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (до 480px) === */
+@media (max-width: 480px) {
+    .website-title {
+        font-size: 22px;
+    }
+
+    .website-name {
+        font-size: 8px;
+    }
+
+    .btnsEdit,
+    .btnsAction {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+        .btnsEdit button,
+        .btnsAction button {
+            width: 100%;
+        }
+
+    table {
+        font-size: 8px;
+    }
+
+    thead th,
+    tbody td {
+        padding: 3px 4px;
+        font-size: 7px;
+    }
+
+    td img {
+        max-width: 70px;
+        max-height: 40px;
+    }
+
+    .box {
+        padding: 20px 15px;
+    }
+
+        .box h2 {
+            font-size: 20px;
+        }
+
+        .box h3 {
+            font-size: 14px;
+        }
+
+        .box label,
+        .box input,
+        .box select {
+            font-size: 14px;
+        }
+
+    .cardModalWindow {
+        flex-direction: column;
+        padding: 6px 10px;
+    }
+
+    .content {
+        max-width: 98vw;
+        max-height: 95vh;
+        border-radius: 10px;
+    }
+}

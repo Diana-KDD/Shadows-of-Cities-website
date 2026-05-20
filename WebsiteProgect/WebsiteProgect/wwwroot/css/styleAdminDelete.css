@@ -1,0 +1,277 @@
+﻿/* === БАЗОВЫЕ СТИЛИ === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: default;
+    user-select: none;
+}
+
+body {
+    padding: 30px 80px;
+    background-color: #181818;
+    color: #b0b0b0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* === ЗАГОЛОВОК === */
+h2 {
+    font-size: 40px;
+    color: #d0d0d0;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+}
+
+/* === КАРТОЧКА ПОДТВЕРЖДЕНИЯ === */
+.confirm-box {
+    background-color: #1e1e1e;
+    border: 2px solid #333333;
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    transition: border-color 0.3s;
+    position: relative;
+}
+
+.confirm-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.confirm-box:hover {
+    border-color: #555555;
+}
+
+.confirm-box img {
+    max-width: 100%;
+    max-height: 300px;
+    margin-bottom: 20px;
+    border: 1px solid #333333;
+}
+
+.confirm-box h2 {
+    font-size: 30px;
+    color: #d0d0d0;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.confirm-box p {
+    font-size: 18px;
+    color: #888888;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.confirm-box p strong {
+    color: #b0b0b0;
+}
+
+/* === ФОРМА === */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* === СКРЫТОЕ ПОЛЕ === */
+input[type="hidden"] {
+    display: none;
+}
+
+/* === КНОПКИ === */
+button {
+    padding: 15px 40px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-grow: 1;
+    min-width: 200px;
+}
+
+button.cancel {
+    background-color: #4f4f6b;
+    color: #b0b0d0;
+}
+
+button.cancel:hover {
+    background-color: #6b6b8b;
+    color: #d0d0f0;
+    border-color: #d0d0f0;
+}
+
+button[type="submit"] {
+    background-color: #6b4f4f;
+    color: #d0b0b0;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: #8b3a3a;
+    color: #f0b0b0;
+    border-color: #f0b0b0;
+}
+
+/* === АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ (до 767px) === */
+@media (max-width: 767px) {
+    body {
+        padding: 20px 15px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .confirm-box {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .confirm-box img {
+        max-height: 200px;
+    }
+
+    .confirm-box h2 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+
+    .confirm-box p {
+        font-size: 14px;
+        margin: 8px 0;
+    }
+
+    form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 16px;
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ (768px - 1023px) === */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        padding: 30px 40px;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    .confirm-box {
+        padding: 25px;
+        max-width: 500px;
+    }
+
+    .confirm-box h2 {
+        font-size: 26px;
+    }
+
+    .confirm-box p {
+        font-size: 16px;
+    }
+
+    button {
+        padding: 14px 30px;
+        font-size: 18px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ БОЛЬШИХ ЭКРАНОВ (от 1440px) === */
+@media (min-width: 1440px) {
+    body {
+        padding: 50px 120px;
+    }
+
+    h2 {
+        font-size: 48px;
+        margin-bottom: 40px;
+    }
+
+    .confirm-box {
+        max-width: 700px;
+        padding: 40px;
+    }
+
+    .confirm-box img {
+        max-height: 400px;
+    }
+
+    .confirm-box h2 {
+        font-size: 36px;
+        margin: 20px 0;
+    }
+
+    .confirm-box p {
+        font-size: 20px;
+        margin: 12px 0;
+    }
+
+    form {
+        max-width: 700px;
+    }
+
+    button {
+        padding: 18px 50px;
+        font-size: 22px;
+        min-width: 250px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (до 480px) === */
+@media (max-width: 480px) {
+    h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .confirm-box {
+        padding: 15px;
+    }
+
+    .confirm-box img {
+        max-height: 150px;
+    }
+
+    .confirm-box h2 {
+        font-size: 18px;
+        margin: 8px 0;
+    }
+
+    .confirm-box p {
+        font-size: 12px;
+        margin: 6px 0;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}

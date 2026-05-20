@@ -1,0 +1,501 @@
+﻿/* === БАЗОВЫЕ СТИЛИ === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: default;
+    user-select: none;
+}
+
+body {
+    padding: 30px 80px;
+    background-color: #181818;
+}
+
+/* === ТИПОГРАФИКА === */
+h1 {
+    font-size: 60px;
+    color: #d0d0d0;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* === ФОРМА === */
+form {
+    display: flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.firstPart,
+.secondPart {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* === FIELDSET === */
+fieldset {
+    display:flex;
+    flex-direction:column;
+    border: 2px solid #333333;
+    padding: 20px;
+    background-color: #1e1e1e;
+    transition: border-color 0.3s;
+}
+
+fieldset:hover {
+    border-color: #555555;
+}
+
+legend {
+    font-size: 24px;
+    color: rgb(160, 187, 151);
+    padding: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* === ЭЛЕМЕНТЫ ФОРМЫ === */
+label {
+    display: block;
+    color: #b0b0b0;
+    font-size: 18px;
+    margin: 15px 0 5px;
+}
+
+input[type = "text"],
+input[type = "number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #2a2a2a;
+    color: #d0d0d0;
+    border: 1px solid #444444;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    transition: all 0.3s;
+    outline: none;
+}
+
+input[type = "text"]:focus,
+input[type = "number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: rgb(157, 181, 144);
+    background-color: #333333;
+    box-shadow: 0 0 5px rgba(157, 181, 144, 0.3);
+}
+
+input[type = "text"]::placeholder,
+input[type = "number"]::placeholder,
+textarea::placeholder {
+    color: #666666;
+    font-style: italic;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23888'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+select option
+{
+    background-color: #1e1e1e;
+    color: #b0b0b0;
+}
+
+/* === ПОДСКАЗКИ === */
+small {
+    display: block;
+    color: #777777;
+    font-size: 14px;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* === ЗАГРУЗКА ФАЙЛОВ === */
+input[type = "file"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #2a2a2a;
+    color: #888888;
+    border: 1px dashed #444444;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+input[type = "file"]:hover {
+    border-color: rgb(157, 181, 144);
+    background-color: #333333;
+}
+
+input[type = "file"]::file-selector-button {
+    padding: 8px 16px;
+    background-color: #8b9d83;
+    color: rgb(36, 55, 26);
+    border: none;
+    margin-right: 15px;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+input[type = "file"]::file-selector-button:hover {
+    background-color: rgb(157, 181, 144);
+    color: rgb(230, 252, 207);
+}
+
+/* === КОНТЕЙНЕР ДЛЯ ПРЕВЬЮ === */
+.imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    min-height: 100px;
+    padding: 10px;
+    background-color: #252525;
+    border: 1px solid #333333;
+}
+
+.imageContainer img{
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.imageContainer p {
+    color: #777777;
+    font-size:20px;
+}
+
+/* === КНОПКИ === */
+[role="group"] {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border: 1px solid #333333;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    background: #8b9d83;
+    color: rgb(36, 55, 26);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-grow: 1;
+    max-width: 250px;
+}
+
+button:hover {
+    background: rgb(157, 181, 144);
+    color: rgb(230, 252, 207);
+    border: 1px solid rgb(230, 252, 207);
+}
+
+button[type = "button"].cancel {
+    background: #6b4f4f;
+    color: #d0b0b0;
+}
+
+button[type = "button"].cancel:hover {
+    background: #8b6b6b;
+    color: #f0d0d0;
+    border-color: #f0d0d0;
+}
+
+button[type = "reset"] {
+    background: #4f4f6b;
+    color: #b0b0d0;
+}
+
+button[type = "reset"]:hover {
+    background: #6b6b8b;
+    color: #d0d0f0;
+    border-color: #d0d0f0;
+}
+
+button[type = "submit"] {
+    background: #4f6b4f;
+    color: #b0d0b0;
+}
+
+button[type = "submit"]:hover {
+    background: #6b8b6b;
+    color: #d0f0d0;
+    border-color: #d0f0d0;
+}
+
+/* === МОДАЛЬНОЕ ОКНО === */
+.modalWindow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalWindow .box {
+    display:flex;
+    flex-direction:column;
+    gap:50px;
+    background-color: rgb(198, 203, 193);
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    color: rgb(91, 90, 83);
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.btnsAction
+{
+    display:flex;
+    gap:20px;
+}
+
+/* === ВАЛИДАЦИЯ === */
+input:invalid,
+textarea:invalid,
+select:invalid {
+    border-color: #6b4f4f;
+}
+
+input:invalid:focus,
+textarea:invalid:focus,
+select:invalid:focus {
+    border-color: #8b6b6b;
+    box-shadow: 0 0 5px rgba(139, 107, 107, 0.3);
+}
+
+input:valid,
+textarea:valid,
+select:valid {
+    border-color: #4f6b4f;
+}
+
+/* === АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ (до 767px) === */
+@media(max-width:767px) {
+    body {
+        padding: 10px 15px;
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    .firstPart,
+    .secondPart {
+        flex: 1 1 100%;
+        gap: 15px;
+    }
+
+    fieldset {
+        padding: 15px;
+    }
+
+    legend {
+        font-size: 18px;
+    }
+
+    label {
+        font-size: 14px;
+        margin: 10px 0 3px;
+    }
+
+    input[type = "text"],
+    input[type = "number"],
+    select,
+    textarea {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 60px;
+    }
+
+    small {
+        font-size: 12px;
+    }
+
+    [role= "group"] {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+        max-width: none;
+        width: 100%;
+    }
+
+    .modalWindow.box {
+        padding: 20px;
+        font-size: 16px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ (768px - 1023px) === */
+@media(min-width:768px) and (max-width:1023px) {
+    body {
+        padding: 20px 40px;
+    }
+
+    h1 {
+        font-size: 45px;
+        margin-bottom: 25px;
+    }
+
+    .firstPart,
+    .secondPart {
+        flex: 1 1 350px;
+    }
+
+    legend {
+        font-size: 22px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+
+    input[type = "text"],
+    input[type = "number"],
+    select,
+    textarea {
+        padding: 9px 12px;
+        font-size: 15px;
+    }
+
+    button {
+        padding: 11px 25px;
+        font-size: 16px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ БОЛЬШИХ ЭКРАНОВ (от 1440px) === */
+@media(min-width: 1440px) {
+    body {
+        padding: 40px 120px;
+    }
+
+    h1 {
+        font-size: 70px;
+        margin-bottom: 40px;
+    }
+
+    .firstPart,
+    .secondPart {
+        flex: 1 1 500px;
+        gap: 40px;
+    }
+
+    fieldset {
+        padding: 30px;
+    }
+
+    legend {
+        font-size: 28px;
+    }
+
+    label {
+        font-size: 20px;
+    }
+
+    input[type = "text"],
+    input[type = "number"],
+    select,
+    textarea {
+        padding: 12px 18px;
+        font-size: 18px;
+    }
+
+    button {
+        padding: 14px 35px;
+        font-size: 20px;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (до 480px) === */
+@media(max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    fieldset {
+        padding: 10px;
+    }
+
+    legend {
+        font-size: 16px;
+    }
+
+    label {
+        font-size: 13px;
+        margin: 8px 0 2px;
+    }
+
+    input[type = "text"],
+    input[type = "number"],
+    select,
+    textarea {
+        padding: 6px 8px;
+        font-size: 13px;
+    }
+
+    textarea {
+        min-height: 50px;
+    }
+
+    small {
+        font-size: 11px;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+}
