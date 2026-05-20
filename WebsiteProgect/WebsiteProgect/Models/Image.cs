@@ -8,7 +8,7 @@ namespace WebsiteProgect.Models
         public string ImageName { get; set; } = null!;
         public string ImagePath { get; set; } = null!;
         public int PlaceId { get; set; }
-        public int IsPrimary {  get; set; }
+        public bool IsPrimary {  get; set; } = false;
 
         public Place? Place { get; set; }
     }

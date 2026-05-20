@@ -1,20 +1,40 @@
 ﻿@* Views/Admin/Delete.cshtml *@
 @model WebsiteProgect.Models.Place
-@{
-    ViewData["Title"] = "Удаление места";
-}
+@{}
 
-<h2>Вы уверены, что хотите удалить это место?</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Удаление места</title>
+    <link rel="stylesheet" href="/css/styleAdminDelete.css" />
+</head>
+<body>
+    <h2>Вы уверены, что хотите удалить это место?</h2>
 
-<div class="confirm-box">
-    <p><strong>Название:</strong> @Model.Name</p>
-    <p>@Model.City?.Country?.Name, @Model.City?.Name</p>
-    <p><strong>Категория:</strong> @Model.Category?.Name</p>
-</div>
+    <div class="confirm-box">
 
-<form asp-action="Delete" method="post">
-    <!-- Скрытое поле для передачи id -->
-    <input type="hidden" name="id" value="@Model.Id" />
-    <button type="submit">Удалить</button>
-    <a href="/Admin">Отмена</a>
-</form>
+        @if (@Model.Images != null && @Model.Images.Any())
+        {
+            <img src="@Model.Images.FirstOrDefault(i => i.IsPrimary == true)?.ImagePath"
+                 alt="@Model.Name" />
+        }
+
+        <h2>Название: @Model.Name</h2>
+        @if (@Model.City!=null)
+        {
+            <p>@Model.City?.Country?.Name</p>
+            <p>@Model.City?.Name</p>
+        }
+        <p><strong>Категория:</strong> @Model.Category?.Name</p>
+    </div>
+
+    <form action="Delete" method="post">
+        <!-- Скрытое поле для передачи id -->
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="button" class="cancel">Отмена</button>
+        <button type="submit">Удалить</button>
+    </form>
+
+    <script src="~/js/AdminDelete.js"></script>
+</body>
+</html>

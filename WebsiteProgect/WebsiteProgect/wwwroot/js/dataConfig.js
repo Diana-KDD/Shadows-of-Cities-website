@@ -1,6 +1,6 @@
 ﻿const DATA_TYPES = {
     Category: {
-        title: 'Редактор категорий111',
+        title: 'Редактор категорий',
         newTitle: 'Новая категория',
         editTitle: (name) => `Редактировать категорию: ${name}`,
         placeholder: 'Завод',
@@ -11,11 +11,11 @@
             delete: (id) => `/api/Api/DeleteCategory/${id}`
         },
         deleteWarning: (name) => `Вы уверены, что хотите удалить категорию: <strong>${escapeHtml(name)}</strong>?
-        <span>После удаления данной категории, места с этой категорией получат пустую категорию.</span>`,
+        <span>После удаления данной категории, места с этой категорией получат категорию "Другое".</span>`,
         body: (name) => JSON.stringify({ name })
     },
     Country: {
-        title: 'Редактор стран111',
+        title: 'Редактор стран',
         newTitle: 'Новая страна',
         editTitle: (name) => `Редактировать страну: ${name}`,
         placeholder: 'Россия',
@@ -30,7 +30,7 @@
         body: (name) => JSON.stringify({ name })
     },
     City: {
-        title: 'Редактор городов111',
+        title: 'Редактор городов',
         newTitle: 'Новый город',
         editTitle: (name) => `Редактировать город: ${name}`,
         placeholder: 'Москва',

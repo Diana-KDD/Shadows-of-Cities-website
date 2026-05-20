@@ -17,6 +17,8 @@ namespace WebsiteProgect.Controllers
             _context = context;
         }
 
+        //-------------------------------------------------
+
         [HttpGet("GetCategories")]
         public async Task<IActionResult> GetCategories()
         {
@@ -25,6 +27,97 @@ namespace WebsiteProgect.Controllers
                 .ToListAsync();
             return Ok(categories);
         }
+
+        [HttpPost("AddCategory")]
+        public async Task<IActionResult> AddCategory([FromBody] CategoryDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Name) || dto.Name.Length < 2)
+            {
+                return BadRequest("Название должно быть не менее 2 символов");
+            }
+
+            if (dto.Name.ToLower() == ("Другое").ToLower())
+            {
+                return BadRequest("Это название не доступно.");
+            }
+
+            var exists = await _context.Categories.AnyAsync(c => c.Name.ToLower() == dto.Name.ToLower());
+            if (exists)
+            {
+                return Conflict("Категория с таким названием уже существует");
+            }
+
+            var category = new Category { Name = dto.Name, IsDefault = false };
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { id = category.Id, name = category.Name });
+        }
+
+        [HttpPut("ChangeCategory/{id}")]
+        public async Task<IActionResult> ChangeCategory(int id, [FromBody] CategoryDto dto)
+        {
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+            {
+                return BadRequest("Категория не найдена");
+            }
+
+            var exists = await _context.Categories.AnyAsync(c => c.Name.ToLower() == dto.Name.ToLower());
+            if (exists)
+            {
+                return Conflict("Категория с таким названием уже существует");
+            }
+
+            if (dto.Name.ToLower() == "Другое".ToLower())
+            {
+                return BadRequest("Категория не может иметь системное имя.");
+            }
+
+            if (category.IsDefault)
+            {
+                return BadRequest("Системная категория не может быть изменена");
+            }
+
+            category.Name = dto.Name;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete("DeleteCategory/{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+            {
+                return BadRequest("Категория не найдена");
+            }
+
+            if (category.IsDefault)
+            {
+                return BadRequest("Системная категория не может быть удалена");
+            }
+
+            var listPlace = await _context.Places.Where(p => p.CategoryId == category.Id).ToListAsync();
+            var categoryOther = _context.Categories.FirstOrDefault(c => c.Name == "Другое");
+            if (categoryOther == null)
+            {
+                categoryOther = new Category { Name = "Другое", IsDefault = true };
+                _context.Categories.Add(categoryOther);
+                await _context.SaveChangesAsync();
+            }
+
+            foreach (var place in listPlace)
+            {
+                place.CategoryId = categoryOther.Id;
+            }
+
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //-------------------------------------------------
 
         [HttpGet("GetCountries")]
         public async Task<IActionResult> GetCountries()
@@ -76,7 +169,22 @@ namespace WebsiteProgect.Controllers
             return Ok();
         }
 
-        [HttpGet("GetCitiesByCountry/{id}")]
+        [HttpDelete("DeleteCountry/{id}")]
+        public async Task<IActionResult> DeleteCountry(int id)
+        {
+            var country = _context.Countries.FirstOrDefault(c => c.Id == id);
+            if (country == null)
+            {
+                return BadRequest("Страна не найдена");
+            }
+            _context.Countries.Remove(country);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //-------------------------------------------------
+
+        [HttpGet("GetCitiesByCountry")]
         public async Task<IActionResult> GetCitiesByCountry(int countryId)
         {
             var cities = await _context.Cities
@@ -118,10 +226,7 @@ namespace WebsiteProgect.Controllers
             {
                 return Conflict("Город с таким названием уже существует");
             }
-            if(dto.CountryId == null)
-            {
-                return BadRequest("Страна не зафиксирована");
-            }
+
             var country = await _context.Countries.FindAsync(dto.CountryId);
             var city = new City { Name = dto.Name, CountryId = (int)dto.CountryId, Country = country };
             _context.Cities.Add(city);
@@ -160,73 +265,6 @@ namespace WebsiteProgect.Controllers
             }
 
             city.Name = dto.Name;
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
-
-        [HttpPost("AddCategory")]
-        public async Task<IActionResult> AddCategory([FromBody] CategoryDto dto)
-        {
-            if (string.IsNullOrWhiteSpace(dto.Name) || dto.Name.Length < 2)
-            {
-                return BadRequest("Название должно быть не менее 2 символов");
-            }
-
-            var exists = await _context.Categories.AnyAsync(c => c.Name.ToLower() == dto.Name.ToLower());
-            if (exists)
-            {
-                return Conflict("Категория с таким названием уже существует");
-            }
-
-            var category = new Category { Name = dto.Name };
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { id = category.Id, name = category.Name });
-        }
-
-        [HttpPut("ChangeCategory/{id}")]
-        public async Task<IActionResult> ChangeCategory(int id, [FromBody] CategoryDto dto)
-        {
-            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
-            if (category == null)
-            {
-                return BadRequest("Категория не найдена");
-            }
-
-            var exists = await _context.Categories.AnyAsync(c => c.Name.ToLower() == dto.Name.ToLower());
-            if (exists)
-            {
-                return Conflict("Категория с таким названием уже существует");
-            }
-
-            category.Name = dto.Name;
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
-
-        [HttpDelete("DeleteCategory/{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
-        {
-            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
-            if (category == null)
-            {
-                return BadRequest("Категория не найдена");
-            }
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
-
-        [HttpDelete("DeleteCountry/{id}")]
-        public async Task<IActionResult> DeleteCountry(int id)
-        {
-            var country = _context.Countries.FirstOrDefault(c => c.Id == id);
-            if (country == null)
-            {
-                return BadRequest("Страна не найдена");
-            }
-            _context.Countries.Remove(country);
             await _context.SaveChangesAsync();
             return Ok();
         }

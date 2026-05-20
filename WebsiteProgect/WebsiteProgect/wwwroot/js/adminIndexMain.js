@@ -2,7 +2,11 @@
 modalWindowBox = document.querySelector('.modalUpdate .box'),
 btnCategoryChange = document.querySelector('.categoryChange'),
 btnCountryChange = document.querySelector('.countryChange'),
-btnCityChange = document.querySelector('.cityChange');
+btnCityChange = document.querySelector('.cityChange'),
+btnPlaceAdd = document.querySelector('.placeAdd'),
+btnsPlaceDelete = document.querySelectorAll('.btnDelete'),
+btnsPlaceChange = document.querySelectorAll('.placeChange');
+btnBack = document.querySelector('.back');
 
 //--------------------------------------------------------------
 
@@ -21,6 +25,28 @@ btnCityChange.addEventListener('click', async () => {
     await renderModalWindowForm('City', 'LoadList');
 });
 
+btnPlaceAdd.addEventListener('click', () => {
+    window.location.href = '/Admin/Create';
+});
+
+btnsPlaceDelete.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+        const button = event.currentTarget;
+        window.location.href = `/Admin/Delete?id=${button.dataset.id}`;
+    });
+});
+
+btnsPlaceChange.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+        const button = event.currentTarget;
+        window.location.href = `/Admin/Change/${button.dataset.id}`;
+    });
+});
+
+btnBack.addEventListener('click', () => {
+    window.location.href = '/Places/Index';
+})
+
 //--------------------------------------------------------------
 
 async function renderModalWindowForm(dataType, actionType, data = null) {
@@ -35,6 +61,7 @@ async function renderModalWindowForm(dataType, actionType, data = null) {
     }
 
     const btnClose = createButton(' X ', () => renderModalWindowForm(dataType, 'CloseModal'));
+    btnClose.className = 'btnClose';
     modalWindowBox.appendChild(btnClose);
 
     const title = document.createElement('h2');
@@ -57,29 +84,43 @@ async function loadListAndActions(dataType) {
             const title2 = document.createElement('h3');
             title2.textContent = 'Данных нет. Добавьте.';
             modalWindowBox.appendChild(title2);
+            const btnAddCard = createButton(' + ', () => renderModalWindowForm(dataType, 'Add'));
+            modalWindowBox.appendChild(btnAddCard);
         }
         else {
+            const btnAddCard = createButton(' + ', () => renderModalWindowForm(dataType, 'Add'));
+            modalWindowBox.appendChild(btnAddCard);
             data.forEach(item => {
                 const nameCard = document.createElement('h3');
                 nameCard.textContent = item.name;
-                const btnChangeCard = createButton('Изменить', () => renderModalWindowForm(dataType, 'Change', item));
-                const btnDeleteCard = createButton('Удалить', () => renderModalWindowForm(dataType, 'Delete', item));
 
                 const div = document.createElement('div');
                 div.className = 'cardModalWindow';
                 div.appendChild(nameCard);
-                div.appendChild(btnChangeCard);
-                div.appendChild(btnDeleteCard);
+
+                if (!(dataType == "Category" && String(item.name).toLowerCase() == String("Другое").toLowerCase())) {
+
+                    const divBtns = document.createElement('div');
+                    divBtns.className = 'btnsAction';
+
+                    const btnChangeCard = createButton('Изменить', () => renderModalWindowForm(dataType, 'Change', item));
+                    const btnDeleteCard = createButton('Удалить', () => renderModalWindowForm(dataType, 'Delete', item));
+                    btnDeleteCard.classList = `${btnDeleteCard.className} btnDelete`;
+
+                    divBtns.appendChild(btnChangeCard);
+                    divBtns.appendChild(btnDeleteCard);
+                    div.appendChild(divBtns);
+                }
 
                 if (DATA_TYPES[dataType].hasParent) {
                     let divParent = modalWindowBox.querySelector(`.${DATA_TYPES[dataType].parentType}-${item.countryId}`)
                     if (!divParent) {
                         const nameParent = document.createElement('h3');
-                        nameParent.className = DATA_TYPES[dataType].parentType;
-                        nameParent.textContent = item.countryName;;
+                        nameParent.className = 'nameParent';
+                        nameParent.textContent = item.countryName;
 
                         divParent = document.createElement('div');
-                        divParent.className = `listCity ${DATA_TYPES[dataType].parentType}-${item.countryId}`
+                        divParent.className = `listParent ${DATA_TYPES[dataType].parentType}-${item.countryId}`
 
                         divParent.appendChild(nameParent);
                     }
@@ -91,8 +132,6 @@ async function loadListAndActions(dataType) {
                 }   
             })
         }
-        const btnAddCard = createButton(' + ', () => renderModalWindowForm(dataType, 'Add'));
-        modalWindowBox.appendChild(btnAddCard);
     }
     catch (error) {
         console.error('Ошибка загрузки данных:', error);
@@ -188,7 +227,9 @@ async function formAddAndChange(dataType, actionType, data) {
 
     let btnSave;
     if (actionType === 'Add') btnSave = createButton('Сохранить', async () => submitAddOrChange(dataType, 'Add'));
-    else btnSave = createButton('Сохранить', async () => submitAddOrChange(dataType,'Change', data.id));
+    else btnSave = createButton('Сохранить', async () => submitAddOrChange(dataType, 'Change', data.id));
+
+    btnSave.classList = `${btnSave.className} btnSave`;
     div.appendChild(btnSave);
 
     modalWindowBox.appendChild(div);
@@ -208,6 +249,7 @@ function confirmationDeletion(dataType, data) {
     div.appendChild(btnNODelete);
 
     const btnDelete = createButton('Удалить', async () => { await submitdelete(dataType, data.id) });
+    btnDelete.classList = `${btnDelete.className} btnDelete`;
     div.appendChild(btnDelete);
 
     modalWindowBox.appendChild(div);

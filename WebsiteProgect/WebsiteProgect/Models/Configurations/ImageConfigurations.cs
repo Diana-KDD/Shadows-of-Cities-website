@@ -20,7 +20,7 @@ namespace WebsiteProgect.Models.Configurations
                    .HasForeignKey(i => i.PlaceId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(i => i.IsPrimary).HasDefaultValue(0);
+            builder.Property(i => i.IsPrimary).HasDefaultValue(false);
         }
     }
 }

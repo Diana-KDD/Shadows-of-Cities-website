@@ -9,6 +9,8 @@ namespace WebsiteProgect.Models.Configurations
         {
             builder.HasKey(c => c.Id);
 
+            builder.Property(i => i.IsDefault).HasDefaultValue(false);
+
             builder.Property(c => c.Name)
                    .HasMaxLength(50)
                    .IsRequired();

@@ -1,0 +1,119 @@
+﻿@model WebsiteProgect.Models.Place
+@{}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Добавить новое место</title>
+        <link rel="stylesheet" href="/css/styleAdminCreate.css" />
+    </head>
+    <body>
+        <h1>Добавить новое место</h1>
+
+        <form action="Create" method="post" enctype="multipart/form-data">
+            <div class="firstPart">
+                <!-- Основная информация -->
+                <fieldset>
+                    <legend>Основная информация</legend>
+
+                    <label for="name">Название</label>
+                    <input type="text"
+                           id="name"
+                           name="Name"
+                           autocomplete="off"
+                           minlength="2"
+                           maxlength="50"
+                           placeholder="Например: Центральный парк"
+                           required>
+
+                    <label for="category">Категория</label>
+                    <select name="CategoryId" id="category">
+                        <option value="">-- Выберите категорию --</option>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+
+                    <label for="description">Описание</label>
+                    <textarea id="description"
+                              name="Description"
+                              rows="4"
+                              maxlength="2000"
+                              placeholder="Опишите место подробно..."
+                              required></textarea>
+
+                    <label for="history">История</label>
+                    <textarea id="history"
+                              name="History"
+                              rows="4"
+                              maxlength="2000"
+                              placeholder="Исторические факты о месте..."></textarea>
+                </fieldset>
+
+                <!-- География -->
+                <fieldset>
+                    <legend>География</legend>
+
+                    <label for="country">Страна</label>
+                    <select id="country">
+                        <option value="">-- Выберите страну --</option>
+                        @foreach (var country in ViewBag.Countries)
+                        {
+                            <option value="@country.Id">@country.Name</option>
+                        }
+                    </select>
+
+                    <label for="city">Город</label>
+                    <select name="CityId" id="city" disabled>
+                        <option value="">-- Сначала выберите страну --</option>
+                        <!-- Опции -->
+                    </select>
+                </fieldset>
+
+                <!-- Временные данные -->
+                <fieldset>
+                    <legend>Временной период</legend>
+
+                    <label for="yearClosure">Год закрытия</label>
+                    <input type="number"
+                           id="yearClosure"
+                           name="YearClosure"
+                           min="1000"
+                           max="2100"
+                           step="1"
+                           placeholder="Например: 2020">
+                    <small>Оставьте пустым, если место всё ещё работает</small>
+                </fieldset>
+
+            </div>
+            <div class="secondPart">
+                <!-- Медиа -->
+                <fieldset>
+                    <legend>Фотографии</legend>
+
+                    <label for="image">Добавьте фото</label>
+                    <input type="file"
+                           name="Image"
+                           id="image"
+                           accept="image/jpeg, image/png, image/webp"
+                           multiple>
+                    <small>Можно загрузить до 7 фото. Поддерживаются форматы: JPEG, PNG, WebP</small>
+                <div class="imageContainer"></div>
+                </fieldset>
+            </div>
+
+            <div role="group" label="Действия с формой">
+                <button type="button" class="cancel">Отмена</button>
+                <button type="reset">Очистить форму</button>
+                <button type="submit">Добавить место</button>
+            </div>
+
+        </form>
+
+        <div class="modalWindow"><div class="box"></div></div>
+
+        <script src="/js/adminCommon.js"></script>
+        <script src="/js/adminCreate.js"></script>
+    </body>
+</html>
