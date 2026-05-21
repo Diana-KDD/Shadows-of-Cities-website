@@ -1,37 +1,71 @@
 ﻿@* Views/Places/Details.cshtml *@
 @model WebsiteProgect.Models.Place
-@{
-    ViewData["Title"] = "Детальная информация места";
-}
+@{}
 
-<h1>@Model.Name</h1>
-<p>@Model.Category?.Name</p>
-
-@if (@Model.Images != null && @Model.Images.Any())
-{
-    <img src="@Model.Images.FirstOrDefault(i => i.IsPrimary == 1)?.ImagePath"
-         alt="@Model.Name" />
-}
-else
-{
-    <div class="no-photo">Нет фото</div>
-}
-
-@if(@Model.Images.Count > 1)
-{
-    @foreach (var image in @Model.Images)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.Name — Детальная информация</title>
+    <link rel="stylesheet" href="/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/css/stylePlaceDetails.css" />
+</head>
+<body>
+    @if (Model.Images != null && Model.Images.Any())
     {
-        @if(image.IsPrimary != 1)
-        {
-            <img src="@image.ImagePath"
-                 alt="@Model.Name + @image.Id" />
-        }
+        <div class="gallery-wrapper">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    @foreach (var image in Model.Images)
+                    {
+                        <div class="swiper-slide">
+                            <img src="@image.ImagePath" alt="@Model.Name" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="swiper-navigation">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
     }
-}
+    else
+    {
+        <div class="no-photo">Нет фото</div>
+    }
 
-<p>@Model.Description</p>
-<p>@Model.History</p>
-<p>Год закрытия: @Model.YearClosure</p>
-<p>@Model.City?.Country?.Name, @Model.City?.Name</p>
-<p>@Model.CreatedAt</p>
-<a href="/Places/Index">Назад</a>
+    <div class="info-block">
+        <h1>@Model.Name</h1>
+        @if (Model.Category != null)
+        {
+            <span class="category">@Model.Category.Name</span>
+        }
+        <hr />
+        <p class="description">@Model.Description</p>
+
+        @if (!string.IsNullOrWhiteSpace(Model.History))
+        {
+            <p class="history">@Model.History</p>
+        }
+
+        <div class="meta">
+            @if (Model.City != null)
+            {
+                <p class="location">@Model.City.Country?.Name, @Model.City.Name</p>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.YearClosure))
+            {
+                <p>Год закрытия: @Model.YearClosure</p>
+            }
+        </div>
+
+        <p class="created-at">Добавлено: @Model.CreatedAt?.ToString("dd.MM.yyyy")</p>
+
+        <a href="/Places/Index" class="back-link">← Назад к каталогу</a>
+    </div>
+
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="/js/PlaceDetails.js"></script>
+</body>
+</html>
