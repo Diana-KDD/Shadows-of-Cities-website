@@ -1,0 +1,22 @@
+﻿services:
+  web:
+    build: ./WebsiteProgect
+    ports:
+      - "8080:5000"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=ShadowsOfCities;User=sa;Password=YourPassword123!;TrustServerCertificate=True
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourPassword123!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+
+volumes:
+  sqldata:
