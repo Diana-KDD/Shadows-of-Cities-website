@@ -9,7 +9,10 @@
   <ItemGroup>
     <Folder Include="Views\Places\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\uploads\web\fon.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebsiteProgect.Data;
-
-//using (AppDbContext context = new())
-//{
-//    await context.Database.MigrateAsync();
-//}
+using WebsiteProgect.Data.Seeds.WebsiteProgect.Data.Seeds;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,5 +27,13 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Places}/{action=Index}/{id?}"
 );
+
+//-- Применяем миграции и засеиваем данные
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    context.Database.Migrate(); //-- Применяет миграции
+    DbInitializer.Initialize(context); //-- Вызов сидера
+}
 
 app.Run();
