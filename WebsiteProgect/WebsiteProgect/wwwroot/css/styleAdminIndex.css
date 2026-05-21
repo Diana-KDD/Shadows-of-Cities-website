@@ -24,6 +24,11 @@ body {
     color: #d0d0d0;
 }
 
+.text {
+    color: #d0d0d0;
+    font-size: 20px;
+}
+
 /* === РАЗДЕЛИТЕЛЬ === */
 hr {
     margin: 20px 0;
@@ -42,11 +47,11 @@ button {
     border-radius: 5px;
 }
 
-    button:hover {
-        background: rgb(157, 181, 144);
-        color: rgb(230, 252, 207);
-        border: 1px solid rgb(230, 252, 207);
-    }
+button:hover {
+    background: rgb(157, 181, 144);
+    color: rgb(230, 252, 207);
+    border: 1px solid rgb(230, 252, 207);
+}
 
 /* Группы кнопок */
 .btnsEdit,
@@ -60,10 +65,10 @@ button {
     justify-content: center;
 }
 
-    .btnsEdit button,
-    .btnsAction button {
-        flex-grow: 1;
-    }
+.btnsEdit button,
+.btnsAction button {
+    flex-grow: 1;
+}
 
 .placeAdd {
     width: 100%;
@@ -78,31 +83,25 @@ button {
     margin: 0;
 }
 
-    .btnClose:hover {
-        color: rgb(120, 142, 105);
-        background-color: transparent;
-        border: 1px solid transparent;
-    }
+.btnClose:hover {
+    color: rgb(120, 142, 105);
+    background-color: transparent;
+    border: 1px solid transparent;
+}
 
 .btnSave {
     color: rgb(90, 173, 40);
 }
 
-    .btnSave:hover {
-        color: rgb(160, 255, 76);
-        border-color: rgb(160, 255, 76);
-    }
+.btnSave:hover {
+    color: rgb(160, 255, 76);
+    border-color: rgb(160, 255, 76);
+}
 
 .btnDelete {
     color: rgb(137, 15, 15);
     border-color: #333333;
 }
-
-    .btnDelete:hover {
-        color: #a04040;
-        border-color: #8b3a3a;
-        background-color: #2a2020;
-    }
 
 .btnsAction button:last-child {
     border-color: transparent;
@@ -252,6 +251,12 @@ td img {
     background-color: rgb(177, 176, 166);
     color: rgb(231, 232, 218);
     border-color: rgb(231, 232, 218);
+}
+
+.btnDelete:hover {
+    color: #a04040;
+    border-color: #8b3a3a;
+    background-color: #2a2020;
 }
 
 .cardModalWindow {

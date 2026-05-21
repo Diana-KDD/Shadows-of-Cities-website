@@ -61,7 +61,7 @@
                             }
                         </td>
                         <td>@place.Name</td>
-                        <td>Категория</td>
+                        <td>@place.Category?.Name</td>
                         @if (@place.City?.Country?.Name != null && @place.City?.Name != null)
                         {
                             <td> 
@@ -79,7 +79,7 @@
                                 <button class="btnDelete" data-id="@place.Id">Удалить</button>
                             </div>
                         </td>
-                        <td> Дата </td>
+                        <td> @place.CreatedAt?.ToString("dd.MM.yyyy") </td>
                     </tr>
                 }
             </tbody>

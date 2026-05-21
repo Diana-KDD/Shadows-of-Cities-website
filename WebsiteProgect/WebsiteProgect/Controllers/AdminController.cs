@@ -25,6 +25,7 @@ namespace WebsiteProgect.Controllers
         {
             var places = await _context.Places
                     .Include(p => p.Images)
+                    .Include(p => p.Category)
                     .Include(p => p.City)
                         .ThenInclude(c => c.Country)
                     .OrderBy(p => p.Name)
